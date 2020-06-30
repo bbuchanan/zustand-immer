@@ -1,5 +1,5 @@
 import {
-  Paper,
+  IconButton, Paper,
   Table,
   TableBody,
   TableCell,
@@ -8,7 +8,9 @@ import {
   TableRow
 } from "@material-ui/core";
 import { makeStyles } from "@material-ui/core/styles";
+import DeleteIcon from '@material-ui/icons/Delete';
 import React from "react";
+import useStore from "../store/todos";
 import ITodo from "../Types/todo";
 
 interface ITodoListProps {
@@ -23,6 +25,12 @@ const useStyles = makeStyles({
 
 const TodoListComponent: React.FC<ITodoListProps> = props => {
   const classes = useStyles();
+  const { removeTodo } = useStore();
+
+  const handleDelete = (Id: number): void => {
+    removeTodo(Id);
+  }
+
   return (
     <TableContainer component={Paper}>
       <Table className={classes.table} size="small">
@@ -30,15 +38,21 @@ const TodoListComponent: React.FC<ITodoListProps> = props => {
           <TableRow>
             <TableCell>Name</TableCell>
             <TableCell>Complete?</TableCell>
+            <TableCell>Edit/Delete</TableCell>
           </TableRow>
         </TableHead>
         <TableBody>
           {props.todos.map(t => (
             <TableRow>
               <TableCell component="th" scope="row">
-                {t.Name}
+                {t.Title}
               </TableCell>
               <TableCell>{t.IsComplete ? "Yes" : "No"}</TableCell>
+              <TableCell>
+                <IconButton onClick={() => handleDelete(t.Id)} aria-label="delete">
+                  <DeleteIcon />
+                </IconButton>
+              </TableCell>
             </TableRow>
           ))}
         </TableBody>

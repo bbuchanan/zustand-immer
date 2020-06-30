@@ -1,5 +1,5 @@
 export default interface ITodo {
   Id: number;
-  Name: string;
+  Title: string;
   IsComplete: boolean;
 }

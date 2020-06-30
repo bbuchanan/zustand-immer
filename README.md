@@ -1,3 +1,8 @@
+## Zustand + Immer test app
+
+Purpose of this little project is test out [Zustand](https://github.com/react-spring/zustand) in conjunction with [immer](https://github.com/immerjs/immer) for a simple,
+local immutable state.
+
 This project was bootstrapped with [Create React App](https://github.com/facebook/create-react-app).
 
 ## Available Scripts

@@ -1,26 +1,23 @@
-import React from 'react';
-import logo from './logo.svg';
-import './App.css';
+import { Button } from "@material-ui/core";
+import * as React from "react";
+import "./App.css";
+import TodoListComponent from "./Components/TodoListComponent";
+import useStore from "./store/todos";
 
-function App() {
+export default function App() {
+  const { todos, addTodo } = useStore(state => state);
+
+  const handleAddTodo = () => {
+    addTodo({ Id: todos.length + 1, Name: "My new todo!", IsComplete: false });
+  };
+
+
   return (
     <div className="App">
-      <header className="App-header">
-        <img src={logo} className="App-logo" alt="logo" />
-        <p>
-          Edit <code>src/App.tsx</code> and save to reload.
-        </p>
-        <a
-          className="App-link"
-          href="https://reactjs.org"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          Learn React
-        </a>
-      </header>
+      <TodoListComponent todos={todos} />
+      <Button onClick={handleAddTodo} variant="contained" color="primary">
+        Add Todo
+      </Button>
     </div>
   );
 }
-
-export default App;
